@@ -1,0 +1,14 @@
+Auth:
+https://blog.angular-university.io/angular-jwt-authentication/
+
+MockAuth:
+// interceptor ¿eby nie musia³o byæ serwera node, tylko lokalnie bra³o usera i jego JWT
+// todo
+
+Walidacja:
+// w mairê automatyczna i czysta walidacja z jakiegoœ pliku z walidacjami, ¿eby ni ewszystko by³o tak brzydko inlinowo
+// todo
+
+B³êdy:
+// ogarniêcie wyj¹tków (np http timeout, czy bycie offline) jakimœ zunifikowanym przechwytywaczem b³êdów
+// todo
