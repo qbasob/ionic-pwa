@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor';
 import { JwtInterceptor } from '../providers/jwt-interceptor/jwt-interceptor';
+import { fakeBackendProvider } from '../providers/fake-backend-interceptor/fake-backend-interceptor';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { JwtInterceptor } from '../providers/jwt-interceptor/jwt-interceptor';
       useClass: JwtInterceptor,
       multi: true
     },
+    fakeBackendProvider, // provider used to create fake backend; cała ta klamra jak wyżej wewnątrz pliku z interceptorem ("barrel file")
     AuthService
   ]
 })

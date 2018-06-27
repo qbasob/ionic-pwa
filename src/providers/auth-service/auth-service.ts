@@ -21,9 +21,9 @@ export class AuthService {
 
   // TODO: zrozumieć:
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>('/api/login', { email, password })
-      .do(_res => this.setSession)
-      .shareReplay();
+    return this.http.post<User>('/api/authenticate', { email, password })
+      .do(res => this.setSession(res))
+      .shareReplay(); //zrozumieć
   }
 
   private setSession(authResult) {

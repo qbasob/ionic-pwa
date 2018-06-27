@@ -40,14 +40,18 @@ export class LoginPage {
   login() {
     const val = this.form.value;
 
-    if (val.email && val.password) {
+    // poniżesze zakomentowane - pozwala na submit bez wpisanych danych
+    //if (val.email && val.password) {
       this.authService.login(val.email, val.password)
         .subscribe(
-          () => {
-            console.log("User is logged in");
+          _data => {
+            alert("Zalogował!");
             //TODO: ionic Nav
+          },
+          _error => {
+              alert("Nie zalogował :(");
           }
         );
-    }
+    //}
   }
 }

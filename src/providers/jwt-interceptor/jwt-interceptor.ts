@@ -26,11 +26,18 @@ export class JwtInterceptor implements HttpInterceptor {
           // TODO
           // redirect to the login route
           // or show a modal
+          alert("401; token umar");
+        }
+
+        if (err.status === 400) {
+          // TODO
+          // bad request
+          alert("400; zue dane? serwer nie przetrawił");
         }
 
         if (err.status === 404) {
           // TODO
-          alert(" a imię jego czterysta i cztery");
+          alert("404; a imię jego czterysta i cztery");
         }
       }
     });

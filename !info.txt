@@ -1,14 +1,23 @@
-Auth:
+﻿Auth:
 https://blog.angular-university.io/angular-jwt-authentication/
+https://github.com/cornflourblue/angular2-jwt-authentication-example (gotowy projekt z interceptorem i fake backendem)
+https://github.com/cornflourblue/angular2-registration-login-example (jw ale pełniejsze, nie takie surowe demo)
 
 MockAuth:
-// interceptor żeby nie musiało być serwera node, tylko lokalnie brało usera i jego JWT
-// todo
+interceptor żeby nie musiało być serwera node, tylko lokalnie brało usera i jego JWT
+patrz wyżej git
 
 Walidacja:
 // w mairę automatyczna i czysta walidacja z jakiegoś pliku z walidacjami, żeby ni ewszystko było tak brzydko inlinowo
+// niech logowanie pokazuje błąd kiedy puste pola
 // todo
 
 Błędy:
 // ogarnięcie wyjątków (np http timeout, czy bycie offline) jakimś zunifikowanym przechwytywaczem błędów
+// najlepiej jakieś alerty czy coś ładnego, toasty
+// todo
+
+Ładowanie:
+// kiedy coś nie może się dziać w tle (np. logowanie) to wyświetlać loading
+// kiedy coś może się dziać w tle, to niech się dzieje w tle żeby nie przeszkadzać w UX
 // todo
