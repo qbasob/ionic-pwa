@@ -33,6 +33,8 @@ export class AuthService {
       // dostaje wartość z 'oryginalnego' observabla. Jako że to jest http.post to wartość przychodzi jeden raz. Kazdy kolejny subscribe dostaje tę wartość.
       // Subscribe jest w metodzie login strony login po kliknięciu na przycisk. Sprawdzić czy dobrze to rozumiem.
       // Chyba jednak nie, bo przecież dane logowania mogą się zmienić w inputach i wtedy musi być nowy http.post...
+      // w oryginalnym kodzie tutoriala jest napisane:
+      // "We are calling shareReplay to prevent the receiver of this Observable from accidentally triggering multiple POST requests due to multiple subscriptions."
   }
 
   private setSession(authResult) {
