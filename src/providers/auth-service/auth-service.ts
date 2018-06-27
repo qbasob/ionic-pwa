@@ -24,6 +24,15 @@ export class AuthService {
     return this.http.post<User>('/api/authenticate', { email, password })
       .do(res => this.setSession(res))
       .shareReplay(); //zrozumieć
+      // "You generally want to use shareReplay when you have side-effects", a powyższe 'do' służy do side-effectsów
+      // działa jak share, ale trzyma wartości i przekazuje je do nowego ovservera; więc co to share?
+      // share(): Returns a new Observable that multicasts (shares) the original Observable.
+      // https://stackoverflow.com/questions/35141722/how-does-the-rxjs-5-share-operator-work
+      // Na ten moment rozumiem to tak: share i shareReplay tworzą hot observable, co znaczy mniej więcej tyle że każdy nowy subscribe
+      // będzie korzystał z tego observabla który powstał za pierwszym razem. shareReplay powyżej powoduje że każdy nowy subscribe
+      // dostaje wartość z 'oryginalnego' observabla. Jako że to jest http.post to wartość przychodzi jeden raz. Kazdy kolejny subscribe dostaje tę wartość.
+      // Subscribe jest w metodzie login strony login po kliknięciu na przycisk. Sprawdzić czy dobrze to rozumiem.
+      // Chyba jednak nie, bo przecież dane logowania mogą się zmienić w inputach i wtedy musi być nowy http.post...
   }
 
   private setSession(authResult) {

@@ -21,3 +21,7 @@ Błędy:
 // kiedy coś nie może się dziać w tle (np. logowanie) to wyświetlać loading
 // kiedy coś może się dziać w tle, to niech się dzieje w tle żeby nie przeszkadzać w UX
 // todo
+
+Warunkowe ładowanie rzeczy związanych z dev:
+// np ładowanie backend mochk interceptora tylko na localhost, albo kiedy jest jakaś zmienna środowiskowa
+// todo
