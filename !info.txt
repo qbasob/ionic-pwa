@@ -28,6 +28,13 @@ zrobiony PwaErrorHandler z Toastami i NavControllerem
 // http - próbowac retry, jak się nie da to toast; błędy w appce - redirect na stronęz błędem;
 // 404 wewnątrz SPA - routing ** z info, i do tego obsługa NavigationError kiedy błąd routingu
 // do tego wszystko logowane do consoli i na serwer (np. loggly.com, https://sentry.io, https://rollbar.com or http://jsnlog.com)
+// nie da się używać s Service ionicowego NavControllera: https://forum.ionicframework.com/t/why-cant-i-import-navcontroller-and-viewcontroller-into-service-or-app/40999/49
+// można tak: https://forum.ionicframework.com/t/extend-ionicerrorhandler-navigate-to-new-page/86331
+// idea: z ErrorHandlera publishujemy event z błędem, w app.componnecie odbieramy event z błędem i redirectujemy do strony z errorem
+// przewija się powyższe rozwiązanie w wątkach na SO
+// można tak (BaseComponent): https://stackoverflow.com/questions/43222401/ionic-2-angular-2-alert-as-service-with-nav
+// idea: rzeczy związane z wyglądem (toasty) i nawigacją (NavController) powinny być używane w komponentach, serwicesy są tylko do zwracania danych;
+// więc robimy parent komponent z potrzebnymi w całej appce rzeczami (toastami, loadingim, redirectami) i ją extendujemy - i mamy dostęp do tego we wszystkich komponnetach
 
 Ładowanie:
 // kiedy coś nie może się dziać w tle (np. logowanie) to wyświetlać loading
