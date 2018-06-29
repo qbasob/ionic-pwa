@@ -19,16 +19,15 @@ Walidacja:
 Błędy:
 https://www.loggly.com/blog/angular-exception-logging-made-simple/
 https://medium.com/@aleixsuau/error-handling-angular-859d529fa53a
+zrobiony PwaErrorHandler z Toastami i NavControllerem
+// todo
 // można w interceptorze zrobić "return next.handle(request).retry(5);" co próbuje 5 razy połączyćsię z serwerem zanim rzuci wyjątkiem
-// ogarnięcie wyjątków (np http timeout, czy bycie offline) jakimś zunifikowanym przechwytywaczem błędów
-// najlepiej jakieś alerty czy coś ładnego, toasty
 // drugi artykuł ładnie opisuje (ale dowiedzieć się dlaczego w nim jest Inject a w pierwszym zwykłe w construktorze DI)
 // ktoś napisał: "You can use DI with your error handler; you just need to decorate your error handler as Injectable" - do sprawdzenia
 // chyba to działa tylko wtedy kiedy Service wrzucany przez DI do ErrorHandlera nie jest nigdzie indziej używany
-// http - próbowac retry, jak się nie da to toast; błędy w appce - redirect na stronęz błędem; 
+// http - próbowac retry, jak się nie da to toast; błędy w appce - redirect na stronęz błędem;
 // 404 wewnątrz SPA - routing ** z info, i do tego obsługa NavigationError kiedy błąd routingu
 // do tego wszystko logowane do consoli i na serwer (np. loggly.com, https://sentry.io, https://rollbar.com or http://jsnlog.com)
-// todo
 
 Ładowanie:
 // kiedy coś nie może się dziać w tle (np. logowanie) to wyświetlać loading

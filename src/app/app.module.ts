@@ -14,6 +14,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor';
 import { JwtInterceptor } from '../providers/jwt-interceptor/jwt-interceptor';
 import { fakeBackendProvider } from '../providers/fake-backend-interceptor/fake-backend-interceptor';
+import { PwaErrorHandler } from '../providers/pwa-error-handler/pwa-error-handler';
+import { ToastService } from '../providers/toast-service/toast-service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,12 @@ import { fakeBackendProvider } from '../providers/fake-backend-interceptor/fake-
       multi: true
     },
     fakeBackendProvider, // provider used to create fake backend; cała ta klamra jak wyżej wewnątrz pliku z interceptorem ("barrel file")
-    AuthService
+    AuthService,
+    {
+      provide: ErrorHandler,
+      useClass: PwaErrorHandler,
+    },
+    ToastService
   ]
 })
 export class AppModule {}

@@ -48,9 +48,10 @@ export class LoginPage {
             alert("Zalogował!");
             //TODO: ionic Nav
           },
-          _error => {
+          // obsułga wyjątku w PwaErrorHandler
+          /*_error => {
               alert("Nie zalogował :(");
-          }
+          }*/
         );
     //}
   }

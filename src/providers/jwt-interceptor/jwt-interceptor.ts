@@ -20,7 +20,9 @@ export class JwtInterceptor implements HttpInterceptor {
       if (event instanceof HttpResponse) {
         // do stuff with response if you want
       }
-    }, (err: any) => {
+    }
+    // obsługa wyjątku w PWA Error Handler
+    /*, (err: any) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           // TODO
@@ -40,7 +42,8 @@ export class JwtInterceptor implements HttpInterceptor {
           alert("404; a imię jego czterysta i cztery");
         }
       }
-    });
+    }*/
+    );
   }
 
 }
