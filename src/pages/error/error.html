@@ -14,8 +14,10 @@
 
 
 <ion-content padding>
-  <div *ngIf="navParams?.error">
-    <h1>ERROR {{ navParams?.error }}</h1>
+  <div *ngIf="unhandledError">
+    <h1>ERROR: {{ unhandledError.message }}</h1>
+    <h2>{{ unhandledError.status }}</h2>
+    <h3>{{ unhandledError.statusText }}</h3>
     <!-- <a mat-raised-button [routerLink]="'/'">
       <h5>Go to Home</h5>
     </a> -->

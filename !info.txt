@@ -19,7 +19,8 @@ Walidacja:
 Błędy:
 https://www.loggly.com/blog/angular-exception-logging-made-simple/
 https://medium.com/@aleixsuau/error-handling-angular-859d529fa53a
-zrobiony PwaErrorHandler z Toastami i NavControllerem
+zrobiony PwaErrorHandler z Toastami i Event.publish, w app.componnecie Event.subscribe i nawigacja ionicowa
+póki co RollBar do śledzenia wyjątków na stronie - testowy wyjątek działa
 // todo
 // można w interceptorze zrobić "return next.handle(request).retry(5);" co próbuje 5 razy połączyćsię z serwerem zanim rzuci wyjątkiem
 // drugi artykuł ładnie opisuje (ale dowiedzieć się dlaczego w nim jest Inject a w pierwszym zwykłe w construktorze DI)

@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { ToastService } from '../toast-service/toast-service';
+import { Events } from 'ionic-angular';
+import { RollbarService } from '../rollbar-service/rollbar-service';
 
 /*
   Generated class for the PwaErrorHandler provider.
@@ -11,11 +13,12 @@ import { ToastService } from '../toast-service/toast-service';
 @Injectable()
 export class PwaErrorHandler implements ErrorHandler {
 
-  constructor(private toastService: ToastService) {}
+  constructor(private toastService: ToastService, private events: Events, private injector: Injector) {}
 
   handleError(error: Error | HttpErrorResponse) {
+    let rollbar = this.injector.get(RollbarService);
+    // Server error happened
     if (error instanceof HttpErrorResponse) {
-      // Server error happened
       if (!navigator.onLine) {
         // No Internet connection
         return this.toastService.presentToast('No Internet Connection');
@@ -30,23 +33,15 @@ export class PwaErrorHandler implements ErrorHandler {
       // return this.toastService.presentToast(`${error.status} - ${error.message}`);
       console.error("PwaErrorHandler", error);
       return this.toastService.presentToast(`${error.error}`);
-    } else {
-      // Client Error Happend
+    }
+    // Client Error Happend
+    else {
       // Send the error to the server and then
-      // redirect the user to the page with all the info
-      // TODO:
-      /*errorsService
-        .log(error)
-        .subscribe(errorWithContextInfo => {
-          router.navigate(['/error'], { queryParams: errorWithContextInfo });
-        });
-      */
-     // nie można miec NavControlera w Service, wątek:
-     // https://forum.ionicframework.com/t/why-cant-i-import-navcontroller-and-viewcontroller-into-service-or-app/40999/49
-
-     // póki co:
+      // TODO
+      // and then publish error:
       console.error("PwaErrorHandler", error);
-      return this.toastService.presentToast(`${error.message}`);
+      rollbar.error(error);
+      return this.events.publish("UNHANDLED_ERROR", error);
     }
   }
 

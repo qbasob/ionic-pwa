@@ -7,6 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { ErrorPage } from '../pages/error/error';
+
 import { AuthService } from '../providers/auth-service/auth-service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,12 +18,14 @@ import { JwtInterceptor } from '../providers/jwt-interceptor/jwt-interceptor';
 import { fakeBackendProvider } from '../providers/fake-backend-interceptor/fake-backend-interceptor';
 import { PwaErrorHandler } from '../providers/pwa-error-handler/pwa-error-handler';
 import { ToastService } from '../providers/toast-service/toast-service';
+import { RollbarService, rollbarFactory } from '../providers/rollbar-service/rollbar-service';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ErrorPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,8 @@ import { ToastService } from '../providers/toast-service/toast-service';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage
+    LoginPage,
+    ErrorPage
   ],
   providers: [
     StatusBar,
@@ -55,7 +60,11 @@ import { ToastService } from '../providers/toast-service/toast-service';
       provide: ErrorHandler,
       useClass: PwaErrorHandler,
     },
-    ToastService
+    ToastService,
+    {
+      provide: RollbarService,
+      useFactory: rollbarFactory
+    }
   ]
 })
 export class AppModule {}

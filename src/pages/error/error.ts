@@ -14,8 +14,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'error.html',
 })
 export class ErrorPage {
-
+  public unhandledError: Error;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.unhandledError = this.navParams.get('err') as Error;
   }
 
   ionViewDidLoad() {

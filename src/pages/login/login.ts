@@ -39,6 +39,7 @@ export class LoginPage {
 
   login() {
     const val = this.form.value;
+    b = c;
 
     // poniżesze zakomentowane - pozwala na submit bez wpisanych danych
     //if (val.email && val.password) {
