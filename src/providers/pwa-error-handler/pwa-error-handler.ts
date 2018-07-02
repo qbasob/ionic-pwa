@@ -23,24 +23,18 @@ export class PwaErrorHandler implements ErrorHandler {
         // No Internet connection
         return this.toastService.presentToast('No Internet Connection');
       }
-      // Http Error
-      // TODO:
       // Send the error to the server
-      /* errorsService
-        .log(error)
-        .subscribe();*/
+      rollbar.error(error);
       // Show notification to the user
-      // return this.toastService.presentToast(`${error.status} - ${error.message}`);
       console.error("PwaErrorHandler", error);
       return this.toastService.presentToast(`${error.error}`);
     }
     // Client Error Happend
     else {
       // Send the error to the server and then
-      // TODO
+      rollbar.error(error);
       // and then publish error:
       console.error("PwaErrorHandler", error);
-      rollbar.error(error);
       return this.events.publish("UNHANDLED_ERROR", error);
     }
   }
