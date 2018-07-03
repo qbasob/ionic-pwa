@@ -20,7 +20,7 @@ import { ENV } from '@app/env';
 export class LoginPage {
   public isLoggedIn: boolean;
   private form: FormGroup;
-  private envMode: string;
+  protected envMode: string;
 
   constructor(
     public navCtrl: NavController,

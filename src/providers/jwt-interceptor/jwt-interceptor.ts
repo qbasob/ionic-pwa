@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse/*, HttpErrorResponse*/ } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/retry';
 
 /**
   * JwtInterceptor
@@ -15,8 +16,8 @@ export class JwtInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-
-    return next.handle(req).do((event: HttpEvent<any>) => {
+    // póbuje 5 połączeń, zanim rzuci wyjątkiem
+    return next.handle(req).retry(5).do((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         // do stuff with response if you want
       }

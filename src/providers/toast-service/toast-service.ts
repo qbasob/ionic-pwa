@@ -7,7 +7,6 @@ import { ToastController } from 'ionic-angular';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 
-  DO WYWALENIA, nie powinny być rzeczy od UI w service...
 */
 @Injectable()
 export class ToastService {
