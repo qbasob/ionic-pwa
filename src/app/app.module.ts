@@ -18,7 +18,8 @@ import { JwtInterceptor } from '../providers/jwt-interceptor/jwt-interceptor';
 import { fakeBackendProvider } from '../providers/fake-backend-interceptor/fake-backend-interceptor';
 import { PwaErrorHandler } from '../providers/pwa-error-handler/pwa-error-handler';
 import { ToastService } from '../providers/toast-service/toast-service';
-import { RollbarService, rollbarFactory } from '../providers/rollbar-service/rollbar-service';
+import { rollbarFactory } from '../providers/rollbar-service/rollbar-service';
+import Rollbar from 'rollbar';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { RollbarService, rollbarFactory } from '../providers/rollbar-service/rol
     },
     ToastService,
     {
-      provide: RollbarService,
+      provide: Rollbar,
       useFactory: rollbarFactory
     }
   ]

@@ -44,6 +44,7 @@ póki co RollBar do śledzenia wyjątków na stronie - testowy wyjątek działa
 
 Warunkowe ładowanie rzeczy związanych z dev:
 // np ładowanie backend mochk interceptora tylko na localhost, albo kiedy jest jakaś zmienna środowiskowa
+// w ionicu nie ma jako takich env, są obejścia i pluginy od tego
 // todo
 
 i18n a/lub coś do 'mapowania' stringów - w stylu że jest error.message 'Unauthorized' a wyświetla się pełna wiadomość

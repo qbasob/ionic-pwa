@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 import { ToastService } from '../toast-service/toast-service';
 import { Events } from 'ionic-angular';
-import { RollbarService } from '../rollbar-service/rollbar-service';
+import Rollbar from 'rollbar';
 
 /*
   Generated class for the PwaErrorHandler provider.
@@ -13,10 +13,9 @@ import { RollbarService } from '../rollbar-service/rollbar-service';
 @Injectable()
 export class PwaErrorHandler implements ErrorHandler {
 
-  constructor(private toastService: ToastService, private events: Events, private injector: Injector) {}
+  constructor(private toastService: ToastService, private events: Events, private rollbar: Rollbar) {}
 
   handleError(error: Error | HttpErrorResponse) {
-    let rollbar = this.injector.get(RollbarService);
     // Server error happened
     if (error instanceof HttpErrorResponse) {
       if (!navigator.onLine) {
@@ -24,7 +23,7 @@ export class PwaErrorHandler implements ErrorHandler {
         return this.toastService.presentToast('No Internet Connection');
       }
       // Send the error to the server
-      rollbar.error(error);
+      this.rollbar.error(error);
       // Show notification to the user
       console.error("PwaErrorHandler", error);
       return this.toastService.presentToast(`${error.error}`);
@@ -32,7 +31,7 @@ export class PwaErrorHandler implements ErrorHandler {
     // Client Error Happend
     else {
       // Send the error to the server and then
-      rollbar.error(error);
+      this.rollbar.error(error);
       // and then publish error:
       console.error("PwaErrorHandler", error);
       return this.events.publish("UNHANDLED_ERROR", error);
