@@ -6,20 +6,26 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>error-page</ion-title>
+  <ion-navbar color="danger">
+    <ion-title>An Error Occured</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div *ngIf="unhandledError">
-    <h1>ERROR: {{ unhandledError.message }}</h1>
-    <h2>{{ unhandledError.status }}</h2>
-    <h3>{{ unhandledError.statusText }}</h3>
-    <!-- <a mat-raised-button [routerLink]="'/'">
-      <h5>Go to Home</h5>
-    </a> -->
-  </div>
+  <ion-grid style="height: 100%;">
+    <ion-row align-items-center style="height: 100%;">
+      <ion-col align-self-center style="text-align: center;">
+        <div *ngIf="unhandledError">
+          <h1>ERROR: {{ unhandledError?.message || "Unknown Error" }}</h1>
+          <h2>{{ unhandledError?.status || "Unknown Status Code" }}</h2>
+          <h3>{{ unhandledError?.statusText || "Unknown Status Text" }}</h3>
+          <!-- <a mat-raised-button [routerLink]="'/'">
+            <h5>Go to Home</h5>
+          </a> -->
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

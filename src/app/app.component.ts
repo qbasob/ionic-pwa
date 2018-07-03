@@ -9,7 +9,7 @@ import { ErrorPage } from '../pages/error/error';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage: any = ErrorPage;
   // nie można DI NavControllera w Root Componencie, oficjalne rozwiązanie z dokumentacji Ionica:
   // https://ionicframework.com/docs/api/navigation/NavController/#navigating-from-the-root-component
   @ViewChild('rootNav') navCtrl: NavController;
@@ -26,7 +26,7 @@ export class MyApp {
 
   handleErrorEvents() {
     this.events.subscribe("UNHANDLED_ERROR", (error: Error) => {
-      this.navCtrl.setRoot(ErrorPage, { err: error });
+      this.navCtrl.setRoot(ErrorPage, { err: error }); // sprawdzić czy działa ErrorPage jako string - strony są lazy loaded więc nie powinno się do nich odnosić obiektem
     });
   }
 }
