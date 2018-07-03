@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
+import { ENV } from '@app/env';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -18,6 +20,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class LoginPage {
   public isLoggedIn: boolean;
   private form: FormGroup;
+  private envMode: string;
 
   constructor(
     public navCtrl: NavController,
@@ -31,10 +34,11 @@ export class LoginPage {
     });
 
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.envMode = ENV.mode;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad LoginPage', ENV);
   }
 
   login() {
