@@ -25,7 +25,7 @@ export class PwaErrorHandler implements ErrorHandler {
       // Send the error to the server
       this.rollbar.error(error);
       // Show notification to the user
-      console.error("PwaErrorHandler", error);
+      console.error('PwaErrorHandler', error);
       return this.toastService.presentToast(`${error.error}`);
     }
     // Client Error Happend
@@ -33,8 +33,8 @@ export class PwaErrorHandler implements ErrorHandler {
       // Send the error to the server and then
       this.rollbar.error(error);
       // and then publish error:
-      console.error("PwaErrorHandler", error);
-      return this.events.publish("UNHANDLED_ERROR", error);
+      console.error('PwaErrorHandler', error);
+      return this.events.publish('UNHANDLED_ERROR', error);
     }
   }
 

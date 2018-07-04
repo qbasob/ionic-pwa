@@ -1,1 +1,11 @@
+<ion-menu [content]="rootNav">
+    <ion-content>
+        <ion-list>
+            <!-- <button ion-item menuClose>Close Menu</button> -->
+            <button ion-item (click)="logoutClicked()">Logout</button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+
 <ion-nav [root]="rootPage" #rootNav></ion-nav>

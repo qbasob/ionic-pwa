@@ -49,8 +49,7 @@ export class LoginPage {
       this.authService.login(val.email, val.password)
         .subscribe(
           _data => {
-            alert("Zalogował!");
-            //TODO: ionic Nav
+            this.navCtrl.setRoot('HomePage');
           },
           // obsułga wyjątku w PwaErrorHandler
           /*_error => {

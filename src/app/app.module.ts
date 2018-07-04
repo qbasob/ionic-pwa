@@ -5,9 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
-import { ErrorPage } from '../pages/error/error';
+// import { HomePage } from '../pages/home/home';
+// import { LoginPage } from '../pages/login/login';
+// import { ErrorPage } from '../pages/error/error';
 
 import { AuthService } from '../providers/auth-service/auth-service';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,9 +24,9 @@ import Rollbar from 'rollbar';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    LoginPage,
-    ErrorPage
+    // HomePage,
+    // LoginPage,
+    // ErrorPage
   ],
   imports: [
     BrowserModule,
@@ -36,8 +36,9 @@ import Rollbar from 'rollbar';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage,
-    ErrorPage
+    // HomePage,
+    // LoginPage,
+    //ErrorPage
   ],
   providers: [
     StatusBar,

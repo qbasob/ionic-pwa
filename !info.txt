@@ -11,6 +11,15 @@ MockAuth:
 interceptor żeby nie musiało być serwera node, tylko lokalnie brało usera i jego JWT
 patrz wyżej git
 
+Nawigacja:
+używam navController, więc nie ma domyślnego routingu angularowego
+strony to moduły, lazy load
+menu boczne z logoutem wstępnie (//todo: tylko kiedy zalogowany, nie na loginie)
+authGuard testowo na homepage, chyba trzeba zrobićBasePage i extendować żeby był wszędzie dostępny: https://devdactic.com/ionic-auth-guards/
+// Jak wygodnie zrobić manu buton na wszystkich podstronach? -> komponent z atrybutami: https://stackoverflow.com/questions/41566079/ionic2-same-header-for-all-pages
+// Jak najlepiej zrobić menu -> nowy komponent, który będzie mieć selektor np. <main-menu> wrzucony w app.html w <ion-menu>
+// poczytać o urlach w Ionicu (np. parametry): https://ionicframework.com/docs/api/navigation/IonicPage/
+
 Błędy:
 https://www.loggly.com/blog/angular-exception-logging-made-simple/
 https://medium.com/@aleixsuau/error-handling-angular-859d529fa53a
@@ -60,3 +69,4 @@ inne
 // np. backButtonText: 'Go Back', tabsPlacement: 'bottom',
 
 // poczytać o wygasanu i refreshowaniu tokena
+// wygodny interceptor, albo fake server rest
