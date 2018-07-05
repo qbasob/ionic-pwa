@@ -12,9 +12,15 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private authService: AuthService
+  ) {}
 
-  ) {
-
+  testButtonClick() {
+    this.authService.testGet()
+      .subscribe(
+        data => {
+          console.log("testButtonClick _data", data);
+        }
+    );
   }
 
   ionViewCanEnter() {

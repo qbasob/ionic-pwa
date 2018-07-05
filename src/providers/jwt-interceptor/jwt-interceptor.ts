@@ -6,8 +6,10 @@ import 'rxjs/add/operator/retry';
 /**
   * JwtInterceptor
   *
-  * Przechwytuje wszystkie requesty i jeżeli response ma kod 401 to znaczy
-  * że wygasł token i przekierowuje na logowanie
+  * //Przechwytuje wszystkie requesty i jeżeli response ma kod 401 to znaczy
+  * //że wygasł token i przekierowuje na logowanie
+  * Logika przeniesiona do PwaErrorHandlera, więc ostatecznie jedyne co robi ten interceptor to 5 prób połączenia
+  * TODO chyba: przenieść to do authInterceptora i ten wywalić
 */
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {

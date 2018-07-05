@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/shareReplay';
 import { User } from '../../shared/user.model';
-import * as moment from "moment";
+import * as moment from 'moment';
 
 /*
   Generated class for the AuthService provider.
@@ -14,7 +14,6 @@ import * as moment from "moment";
 */
 @Injectable()
 export class AuthService {
-
   constructor(public http: HttpClient) {
     console.log('Hello AuthService Provider');
   }
@@ -24,7 +23,7 @@ export class AuthService {
     return this.http.post<User>('/api/authenticate', { email, password })
       .do(res => this.setSession(res))
       .shareReplay(); //zrozumieć
-      // "You generally want to use shareReplay when you have side-effects", a powyższe 'do' służy do side-effectsów
+      // 'You generally want to use shareReplay when you have side-effects", a powyższe 'do' służy do side-effectsów
       // działa jak share, ale trzyma wartości i przekazuje je do nowego ovservera; więc co to share?
       // share(): Returns a new Observable that multicasts (shares) the original Observable.
       // https://stackoverflow.com/questions/35141722/how-does-the-rxjs-5-share-operator-work
@@ -37,6 +36,17 @@ export class AuthService {
       // "We are calling shareReplay to prevent the receiver of this Observable from accidentally triggering multiple POST requests due to multiple subscriptions."
   }
 
+  public refreshToken(): Observable<User> {
+    const token = this.getToken();
+    return this.http.post<User>('/api/authenticate', { token })
+      .do(res => this.setSession(res))
+      .shareReplay();
+  }
+
+  public testGet(): Observable<User> {
+    return this.http.get<User>('/api/users')
+  }
+
   private setSession(authResult) {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
 
@@ -44,18 +54,28 @@ export class AuthService {
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
   }
 
-  logout(): void {
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
-  }
-
-  isLoggedIn(): boolean {
-    return moment().isBefore(this.getExpiration());
-  }
-
-  getExpiration() {
-    const expiration = localStorage.getItem("expires_at");
+  private getExpiration() {
+    const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
+
+  public logout(): void {
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
+  }
+
+  public isLoggedIn(): boolean {
+    //return moment().isBefore(this.getExpiration());
+    return localStorage.getItem('id_token') !== null;
+  }
+
+  public isTokenExpired(): boolean {
+    return !moment().isBefore(this.getExpiration());
+  }
+
+  public getToken(): string {
+    return localStorage.getItem('id_token');
+  }
+
 }

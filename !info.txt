@@ -6,17 +6,22 @@ https://github.com/cornflourblue/angular2-registration-login-example (jw ale pe�
 https://github.com/angular/angular/issues/18224
 AuthService oparty na HttpClient, który leci przez Interceptor oparty na AuthService (np żeby pobrać token) wywala się z circular dependency...
 fixed w @5.2.3: common: allow HttpInterceptors to inject HttpClient (#19809) (ed2b717), closes #18224
+wstępnie mechanizm refreshToken - kiedy wygasa, przed kolejnym requestem leci refreshToken do serwera ze starym tokenem i 'przelogowauje' z nowym tokenem
+// buforowanie requestów nieudanych i ponowienie wszystkich po zalogowaniu
+// Store 401 responses in a buffer inside this service together with an observable that you'll return to the caller. The first 401 sends the token refresh request
+// When you've got he new token, repeat all the requests in the buffer with the new token and call their observables with the new response.
 
 MockAuth:
 interceptor żeby nie musiało być serwera node, tylko lokalnie brało usera i jego JWT
 patrz wyżej git
+
 
 Nawigacja:
 używam navController, więc nie ma domyślnego routingu angularowego
 strony to moduły, lazy load
 menu boczne z logoutem wstępnie (//todo: tylko kiedy zalogowany, nie na loginie)
 authGuard testowo na homepage, chyba trzeba zrobićBasePage i extendować żeby był wszędzie dostępny: https://devdactic.com/ionic-auth-guards/
-// Jak wygodnie zrobić manu buton na wszystkich podstronach? -> komponent z atrybutami: https://stackoverflow.com/questions/41566079/ionic2-same-header-for-all-pages
+// Jak wygodnie zrobić menu buton na wszystkich podstronach? -> komponent z atrybutami: https://stackoverflow.com/questions/41566079/ionic2-same-header-for-all-pages
 // Jak najlepiej zrobić menu -> nowy komponent, który będzie mieć selektor np. <main-menu> wrzucony w app.html w <ion-menu>
 // poczytać o urlach w Ionicu (np. parametry): https://ionicframework.com/docs/api/navigation/IonicPage/
 
@@ -68,5 +73,4 @@ inne
 // można tam trzymać globalne stałe (nie jak ENV które się zmieniają w zależności od środowiska)
 // np. backButtonText: 'Go Back', tabsPlacement: 'bottom',
 
-// poczytać o wygasanu i refreshowaniu tokena
 // wygodny interceptor, albo fake server rest
