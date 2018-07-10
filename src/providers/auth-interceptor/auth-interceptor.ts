@@ -38,7 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     //TODO: lepiej to rozwiązać (jak?)
     // jeżeli logowanie, to puszczamy niezmieniony request (pętliło się przy refreshTokenie)
-    if (req.url === "/api/authenticate") {
+    if (~req.url.indexOf('/auth/login')) {
       return next.handle(req);
     }
 

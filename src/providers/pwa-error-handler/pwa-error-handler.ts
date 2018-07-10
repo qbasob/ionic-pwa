@@ -26,7 +26,7 @@ export class PwaErrorHandler implements ErrorHandler {
       this.rollbar.error(error);
       // Show notification to the user
       console.error('PwaErrorHandler', error);
-      return this.toastService.presentToast(`${error.error}`);
+      return this.toastService.presentToast(`${error.message}`);
     }
     // Client Error Happend
     else {

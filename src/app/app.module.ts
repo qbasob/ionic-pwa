@@ -15,11 +15,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor';
 import { JwtInterceptor } from '../providers/jwt-interceptor/jwt-interceptor';
-import { fakeBackendProvider } from '../providers/fake-backend-interceptor/fake-backend-interceptor';
+// import { fakeBackendProvider } from '../providers/fake-backend-interceptor/fake-backend-interceptor';
 import { PwaErrorHandler } from '../providers/pwa-error-handler/pwa-error-handler';
 import { ToastService } from '../providers/toast-service/toast-service';
 import { rollbarFactory } from '../providers/rollbar-service/rollbar-service';
 import Rollbar from 'rollbar';
+import { EventService } from '../providers/event-service/event-service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import Rollbar from 'rollbar';
       useClass: JwtInterceptor,
       multi: true
     },
-    fakeBackendProvider, // provider used to create fake backend; cała ta klamra jak wyżej wewnątrz pliku z interceptorem ("barrel file")
+    // fakeBackendProvider, // provider used to create fake backend; cała ta klamra jak wyżej wewnątrz pliku z interceptorem ("barrel file")
     AuthService,
     {
       provide: ErrorHandler,
@@ -66,7 +67,8 @@ import Rollbar from 'rollbar';
     {
       provide: Rollbar,
       useFactory: rollbarFactory
-    }
+    },
+    EventService
   ]
 })
 export class AppModule {}

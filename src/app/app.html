@@ -2,7 +2,9 @@
     <ion-content>
         <ion-list>
             <!-- <button ion-item menuClose>Close Menu</button> -->
-            <button ion-item (click)="logoutClicked()">Logout</button>
+            <button ion-item menuClose (click)="openPage('HomePage')">Home</button>
+            <button ion-item menuClose (click)="openPage('EventsPage')">Events</button>
+            <button ion-item menuClose (click)="logoutClicked()">Logout</button>
         </ion-list>
     </ion-content>
 </ion-menu>

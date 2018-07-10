@@ -37,8 +37,12 @@ export class MyApp {
     });
   }
 
+  openPage(pageName: string) {
+    this.navCtrl.setRoot(pageName);
+  }
+
   logoutClicked() {
-    this.menuCtrl.close()
+    // this.menuCtrl.close()
     this.authService.logout();
     this.navCtrl.setRoot('LoginPage');
   }

@@ -5,6 +5,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/shareReplay';
 import { User } from '../../shared/user.model';
 import * as moment from 'moment';
+import * as jwt_decode from 'jwt-decode';
+import { ENV } from '@app/env';
 
 /*
   Generated class for the AuthService provider.
@@ -14,13 +16,16 @@ import * as moment from 'moment';
 */
 @Injectable()
 export class AuthService {
+  private _endpoint: string;
+
   constructor(public http: HttpClient) {
     console.log('Hello AuthService Provider');
+    this._endpoint = ENV.endpoint;
   }
 
   // TODO: zrozumieć:
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>('/api/authenticate', { email, password })
+    return this.http.post<User>(`${this._endpoint}/auth/login`, { email, password })
       .do(res => this.setSession(res))
       .shareReplay(); //zrozumieć
       // 'You generally want to use shareReplay when you have side-effects", a powyższe 'do' służy do side-effectsów
@@ -38,20 +43,23 @@ export class AuthService {
 
   public refreshToken(): Observable<User> {
     const token = this.getToken();
-    return this.http.post<User>('/api/authenticate', { token })
+    return this.http.post<User>(`${this._endpoint}/auth/login`, { token })
       .do(res => this.setSession(res))
       .shareReplay();
   }
 
   public testGet(): Observable<User> {
-    return this.http.get<User>('/api/users')
+    return this.http.get<User>(`${this._endpoint}/users`)
   }
 
   private setSession(authResult) {
-    const expiresAt = moment().add(authResult.expiresIn, 'second');
-
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+    const decoded = jwt_decode(authResult.access_token);
+    const expiresAt = moment.unix(decoded.exp).format('x');
+    // console.log(decoded);
+    // const expiresAt = moment().add(decoded.exp, 'second');
+    // localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('access_token', authResult.access_token);
+    localStorage.setItem('expires_at', expiresAt);
   }
 
   private getExpiration() {
@@ -61,13 +69,13 @@ export class AuthService {
   }
 
   public logout(): void {
-    localStorage.removeItem('id_token');
+    localStorage.removeItem('access_token');
     localStorage.removeItem('expires_at');
   }
 
   public isLoggedIn(): boolean {
     //return moment().isBefore(this.getExpiration());
-    return localStorage.getItem('id_token') !== null;
+    return localStorage.getItem('access_token') !== null;
   }
 
   public isTokenExpired(): boolean {
@@ -75,7 +83,7 @@ export class AuthService {
   }
 
   public getToken(): string {
-    return localStorage.getItem('id_token');
+    return localStorage.getItem('access_token');
   }
 
 }
