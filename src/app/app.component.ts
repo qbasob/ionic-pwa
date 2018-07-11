@@ -9,6 +9,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
 })
 export class MyApp {
   rootPage: any = 'LoginPage';
+  pages: Array<{ title: string, component: string }>;
   // nie można DI NavControllera w Root Componencie, oficjalne rozwiązanie z dokumentacji Ionica:
   // https://ionicframework.com/docs/api/navigation/NavController/#navigating-from-the-root-component
   @ViewChild('rootNav') navCtrl: NavController;
@@ -22,6 +23,15 @@ export class MyApp {
     private menuCtrl: MenuController
 
   ) {
+    if(this.authService.isLoggedIn()) {
+      this.rootPage = 'HomePage';
+    }
+
+    this.pages = [
+      { title: 'Home', component: 'HomePage' },
+      { title: 'Events', component: 'EventsPage' }
+    ];
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

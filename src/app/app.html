@@ -1,9 +1,15 @@
 <ion-menu [content]="rootNav">
     <ion-content>
-        <ion-list>
-            <!-- <button ion-item menuClose>Close Menu</button> -->
+        <!-- <ion-list>
             <button ion-item menuClose (click)="openPage('HomePage')">Home</button>
             <button ion-item menuClose (click)="openPage('EventsPage')">Events</button>
+            <button ion-item menuClose (click)="logoutClicked()">Logout</button>
+        </ion-list> -->
+
+        <ion-list>
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p.component)">
+                {{p.title}}
+            </button>
             <button ion-item menuClose (click)="logoutClicked()">Logout</button>
         </ion-list>
     </ion-content>

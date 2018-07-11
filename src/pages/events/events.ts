@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PwaEvent } from '../../shared/event.model';
 import { EventService } from '../../providers/event-service/event-service';
 import { Observable } from 'rxjs/Observable';
@@ -17,19 +17,27 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'events.html',
 })
 export class EventsPage {
-  protected events: Observable<PwaEvent>;
+  protected events: Observable<Array<PwaEvent>>;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private eventService: EventService
+    private eventService: EventService,
+    private loadingCtrl: LoadingController
 
   ) {
-    this.events = this.eventService.getEvents();
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    this.events = this.eventService.getEvents()
+      .do(() => {
+        loading.dismiss();
+      });
   }
 
   eventSelected(event: PwaEvent) {
-    console.log("eventSelected", event);
+    this.navCtrl.push('EventViewPage', { event });
   }
 
   ionViewDidLoad() {

@@ -17,7 +17,7 @@ export class EventService {
     console.log('Hello EventService Provider');
   }
 
-  getEvents(): Observable<PwaEvent> {
-    return this.http.get<PwaEvent>(`${ENV.endpoint}/products`);
+  getEvents(): Observable<Array<PwaEvent>> {
+    return this.http.get<Array<PwaEvent>>(`${ENV.endpoint}/products`);
   }
 }
