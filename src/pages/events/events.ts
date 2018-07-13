@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { PwaEvent } from '../../shared/event.model';
 import { EventService } from '../../providers/event-service/event-service';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/finally';
 
 /**
  * Generated class for the EventsPage page.
@@ -17,7 +18,11 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'events.html',
 })
 export class EventsPage {
+  // z acync w template:
   protected events: Observable<Array<PwaEvent>>;
+
+  // ręcznie subscribe
+  // protected events: Array<PwaEvent>;
 
   constructor(
     public navCtrl: NavController,
@@ -27,14 +32,27 @@ export class EventsPage {
 
   ) {
     let loading = this.loadingCtrl.create({
-      content: 'Please wait...',
-      dismissOnPageChange: true
+      content: 'Please wait...'
     });
-    loading.present();
+    loading.present()
+
+
+    // z acync w template:
     this.events = this.eventService.getEvents()
-      .do(() => {
+      .finally(() => {
         loading.dismiss();
-      });
+      })
+
+    /*
+    // ręcznie subscribe
+    this.eventService.getEvents()
+      .finally(() => {
+        loading.dismiss();
+      })
+      .subscribe((events: Array<PwaEvent>) => {
+        this.events = events;
+      })
+    */
   }
 
   eventSelected(event: PwaEvent) {

@@ -16,7 +16,7 @@ export class PwaErrorHandler implements ErrorHandler {
   constructor(
     private toastService: ToastService,
     private events: Events,
-    private rollbar: Rollbar
+    private rollbar: Rollbar,
   ) {}
 
   handleError(error: Error | HttpErrorResponse) {
