@@ -42,14 +42,15 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    // póki co wyłączone, jeszcze poczytać na ten temat:
     // jeżeli jest token, ale wygasł to refreshujemy
-    if (this.authService.isTokenExpired()) {
+    /*if (this.authService.isTokenExpired()) {
       return this.authService.refreshToken()
         .switchMap(() => {
           const clonedReq = this.setHeader(req);
           return next.handle(clonedReq);
         })
-    }
+    }*/
 
     // jeżeli jest token i nie wygasł to dodajemy header Authorization: Bearer
     const clonedReq = this.setHeader(req);

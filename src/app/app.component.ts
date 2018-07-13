@@ -45,6 +45,10 @@ export class MyApp {
     this.events.subscribe('UNHANDLED_ERROR', (error: Error) => {
       this.navCtrl.setRoot('ErrorPage', { err: error }); // sprawdzić czy działa ErrorPage jako string - strony są lazy loaded więc nie powinno się do nich odnosić obiektem
     });
+    this.events.subscribe('TOKEN_ERROR', (_error: Error) => {
+      this.authService.logout();
+      this.navCtrl.setRoot('LoginPage');
+    });
   }
 
   openPage(pageName: string) {

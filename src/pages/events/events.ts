@@ -27,7 +27,8 @@ export class EventsPage {
 
   ) {
     let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Please wait...',
+      dismissOnPageChange: true
     });
     loading.present();
     this.events = this.eventService.getEvents()

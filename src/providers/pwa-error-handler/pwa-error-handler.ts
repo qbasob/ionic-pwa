@@ -13,7 +13,11 @@ import Rollbar from 'rollbar';
 @Injectable()
 export class PwaErrorHandler implements ErrorHandler {
 
-  constructor(private toastService: ToastService, private events: Events, private rollbar: Rollbar) {}
+  constructor(
+    private toastService: ToastService,
+    private events: Events,
+    private rollbar: Rollbar
+  ) {}
 
   handleError(error: Error | HttpErrorResponse) {
     // Server error happened
@@ -26,6 +30,10 @@ export class PwaErrorHandler implements ErrorHandler {
       this.rollbar.error(error);
       // Show notification to the user
       console.error('PwaErrorHandler', error);
+      if (error.status === 401) {
+        // token umarł, przekeirowanie na logowanie
+        return this.events.publish('TOKEN_ERROR', error);
+      }
       return this.toastService.presentToast(`${error.message}`);
     }
     // Client Error Happend
