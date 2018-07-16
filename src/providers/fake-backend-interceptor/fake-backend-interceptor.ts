@@ -18,6 +18,9 @@ import 'rxjs/add/operator/dematerialize';
   * /api/users
   * zwraca 200 dane usera jeżeli token porpawny
   * 401 Unauthorized jezeli token się nie zgadza
+  *
+  * Czy alternatywą jest Angular in-memory-web-api???
+  * https://github.com/angular/in-memory-web-api/blob/master/README.md
 */
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {

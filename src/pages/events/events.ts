@@ -20,6 +20,7 @@ import 'rxjs/add/operator/finally';
 export class EventsPage {
   // z acync w template:
   protected events: Observable<Array<PwaEvent>>;
+  protected filter: string;
 
   // ręcznie subscribe
   // protected events: Array<PwaEvent>;
@@ -31,6 +32,11 @@ export class EventsPage {
     private loadingCtrl: LoadingController
 
   ) {
+    //this.filter = ""; // nie trzeba ustawiac wartości początkowej, bo ngModel w template
+    this.getEvents();
+  }
+
+  getEvents() {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -38,7 +44,7 @@ export class EventsPage {
 
 
     // z acync w template:
-    this.events = this.eventService.getEvents()
+    this.events = this.eventService.getEvents(this.filter)
       .finally(() => {
         loading.dismiss();
       })
@@ -55,8 +61,16 @@ export class EventsPage {
     */
   }
 
-  eventSelected(event: PwaEvent) {
+  filterEvents(event: any) {
+    console.log(event);
+  }
+
+  viewEvent(event: PwaEvent) {
     this.navCtrl.push('EventViewPage', { event });
+  }
+
+  editEvent(event: PwaEvent) {
+    this.navCtrl.push('EventEditPage', { event });
   }
 
   ionViewDidLoad() {

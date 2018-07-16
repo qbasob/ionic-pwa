@@ -1,3 +1,4 @@
 export interface PwaEvent {
-    name: string
+    id: number;
+    name: string;
 }

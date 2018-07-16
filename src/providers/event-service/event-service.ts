@@ -17,7 +17,16 @@ export class EventService {
     console.log('Hello EventService Provider');
   }
 
-  getEvents(): Observable<Array<PwaEvent>> {
-    return this.http.get<Array<PwaEvent>>(`${ENV.endpoint}/products`);
+  getEvents(filter: string): Observable<Array<PwaEvent>> {
+    let urlFilter = '';
+    if (filter) {
+      urlFilter = `?q=${filter}`;
+    }
+    return this.http.get<Array<PwaEvent>>(`${ENV.endpoint}/products${urlFilter}`);
+  }
+
+  putEvent(event: PwaEvent): Observable<Array<PwaEvent>> {
+    const eventId = event.id;
+    return this.http.put<Array<PwaEvent>>(`${ENV.endpoint}/products/${eventId}`, event);
   }
 }

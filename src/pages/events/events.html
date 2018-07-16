@@ -16,10 +16,17 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-searchbar placeholder="Szukaj" [(ngModel)]="filter" (ionInput)="getEvents()"></ion-searchbar>
   <ion-list>
-    <button ion-item *ngFor="let event of events | async" (click)="eventSelected(event)">
-      {{ event.name }}
-    </button>
+    <ion-item-sliding *ngFor="let event of events | async">
+      <button ion-item (click)="viewEvent(event)">
+        {{ event.name }}
+      </button>
+      <ion-item-options side="right">
+        <button ion-button color="light" (click)="viewEvent(event)">View</button>
+        <button ion-button color="light" (click)="editEvent(event)">Edit</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
