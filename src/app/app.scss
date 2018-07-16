@@ -20,3 +20,8 @@
        background-color: color($colors, danger, base)!important;
    }
 }
+
+//fix na desktopowe/chromowe szare zdisablowane scrollbary
+::-webkit-scrollbar{
+    display:none;
+}
