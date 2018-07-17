@@ -30,6 +30,10 @@
       <ion-label floating>Quantity</ion-label>
       <ion-input type="number" [(ngModel)]="event.quantity"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label>Ocena</ion-label>
+      <star item-content [(rating)]="event.points"></star>
+    </ion-item>
   </ion-list>
 
   <ion-row>
