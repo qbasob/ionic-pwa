@@ -1,0 +1,20 @@
+star-fc {
+    // taki trik, żeby pokazać kolorem gwiazdkę najechaną i wcześniejsze:
+    // 1. na hover całego komponentu ustawiamy wszystkie gwiazdki na kolor primary
+    &:hover {
+        .star {
+            color: color($colors, primary);
+        }
+    }
+    .star {
+        font-size: 2em;
+        cursor: pointer;
+
+        // 2. wszystkie gwiazdki dalej niż najechana gwiazdka (selektor ~) zmieniamy na czarne
+        &:hover {
+            ~.star {
+                color: #000;
+            }
+        }
+    }
+}
